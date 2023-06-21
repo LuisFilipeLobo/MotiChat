@@ -4,4 +4,5 @@
     <string name="lets_start">Vamos começar?</string>
     <string name="save">Salvar</string>
     <string name="new_phrase">Nova frase</string>
+    <string name="msg_error_invalid_username">Nome de usuário inválido. Utilize apenas letras.</string>
 </resources>
