@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.motichat.infrastructure.MotiChatConstants
 import com.motichat.R
-import com.motichat.infrastructure.SecurityPreferences
 import com.motichat.databinding.ActivityMainBinding
+import com.motichat.infrastructure.MotiChatConstants
+import com.motichat.infrastructure.SecurityPreferences
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -25,6 +25,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         supportActionBar?.hide()
 
         binding.btnSave.setOnClickListener(this)
+
+        // Verificar se o nome do usuário já foi informado
+        verifyUsername()
     }
 
     override fun onClick(view: View) {
@@ -47,10 +50,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         } else {
             // Exibir mensagem de erro
             Toast.makeText(
-                this,
-                R.string.msg_error_invalid_username,
-                Toast.LENGTH_SHORT
+                this, R.string.msg_error_invalid_username, Toast.LENGTH_SHORT
             ).show()
         }
     }
+
+    /**
+     * Essa função tem a finalidade de verificar se o usuário já forneceu seu nome anteriormente.
+     * Se o nome do usuário tiver sido informado previamente, o usuário será redirecionado
+     * diretamente para a UserActivity.
+     */
+    private fun verifyUsername() {
+        val name = SecurityPreferences(this).getString(MotiChatConstants.KEY.USER_NAME)
+
+        if (name != "") {
+            startActivity(Intent(this, UserActivity::class.java))
+            finish()
+        }
+    }
+
 }
