@@ -36,6 +36,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val username = binding.editWhatsYourName.text.toString()
 
         if (username.matches(regex)) {
+            // Salvar o nome do usuário
+            SecurityPreferences(this).saveString("USER_NAME", username)
+
+            // Navegar para a próxima activity
             startActivity(Intent(this, UserActivity::class.java))
         } else {
             // Exibir mensagem de erro
