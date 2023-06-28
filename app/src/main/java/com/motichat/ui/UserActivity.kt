@@ -5,6 +5,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.motichat.R
+import com.motichat.data.MockedPhrases
 import com.motichat.databinding.ActivityUserBinding
 import com.motichat.infrastructure.MotiChatConstants
 import com.motichat.infrastructure.SecurityPreferences
@@ -12,7 +13,7 @@ import com.motichat.infrastructure.SecurityPreferences
 class UserActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityUserBinding
-    private var categoryId = 1
+    private var categoryId = MotiChatConstants.FILTER.ALL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,17 +29,21 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
         // Iniciar com o ícone All Inclusive selecionado
         handleFilter(R.id.ic_all_inclusive)
 
+        // Iniciar já com alguma frase na tela
+        handleNextPhrase()
+
         // Eventos de click
         binding.icAllInclusive.setOnClickListener(this)
         binding.icHappy.setOnClickListener(this)
         binding.icSunny.setOnClickListener(this)
+        binding.btnNewPhrase.setOnClickListener(this)
 
         setContentView(binding.root)
     }
 
     override fun onClick(view: View) {
         if (view.id == R.id.btn_new_phrase) {
-            TODO("TODO")
+            handleNextPhrase()
         } else if (view.id in listOf(R.id.ic_all_inclusive, R.id.ic_happy, R.id.ic_sunny)) {
             handleFilter(view.id)
         }
@@ -78,6 +83,13 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
                 categoryId = MotiChatConstants.FILTER.SUNNY
             }
         }
+    }
+
+    /**
+     * Essa função tem como finalidade buscar novas frases sempre que o botão Nova frase for clicado.
+     */
+    private fun handleNextPhrase() {
+        binding.textPhrase.text = MockedPhrases().getPhrase(categoryId)
     }
 
 }

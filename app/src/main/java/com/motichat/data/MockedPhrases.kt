@@ -1,6 +1,7 @@
 package com.motichat.data
 
 import com.motichat.infrastructure.MotiChatConstants
+import kotlin.random.Random
 
 data class Phrase(val categoryId: Int, val phrase: String)
 
@@ -9,7 +10,7 @@ class MockedPhrases {
     private val happy = MotiChatConstants.FILTER.HAPPY
     private val sunny = MotiChatConstants.FILTER.SUNNY
 
-    val phrasesList = listOf<Phrase>(
+    private val phrasesList = listOf<Phrase>(
         Phrase(happy, "Nada do que você faz importa, então por que se esforçar?"),
         Phrase(happy, "Você nunca será bom o suficiente, então é melhor nem tentar."),
         Phrase(happy, "O mundo é injusto e não importa o que você faça, nunca terá sucesso."),
@@ -44,4 +45,14 @@ class MockedPhrases {
         Phrase(sunny, "Sua vida sempre foi um tédio desesperador. Aproveite o momento! É seu tempo de brilhar."),
         Phrase(sunny, "Bom dia! Lembrou do tempo que a vida era mais fácil? Nem eu!"),
     )
+
+    /**
+     * Essa função tem como finalidade retornar uma frase baseada na categoria escolhida pelo usuário.
+     */
+    fun getPhrase(value: Int): String {
+        val filteredList = phrasesList.filter { it.categoryId == value || value == all }
+
+        return filteredList[Random.nextInt(filteredList.size)].phrase
+    }
+
 }
