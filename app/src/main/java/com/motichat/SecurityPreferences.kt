@@ -16,11 +16,10 @@ class SecurityPreferences(context: Context) {
     }
 
     /**
-     * Esta função retorna o nome do usuário a partir de sua respectiva chave
+     * Esta função retorna o nome do usuário a partir de sua respectiva chave.
+     * Caso não haja correspondência, retorna uma string vazia.
      */
     fun getString(key: String): String {
-        val username = security.getString(key, "").orEmpty()
-
-        return "Olá, $username"
+        return security.getString(key, "").orEmpty()
     }
 }

@@ -17,6 +17,9 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
         // Esconder a action bar
         supportActionBar?.hide()
 
+        // Exibir nome do usuário
+        handleUsername()
+
         setContentView(binding.root)
     }
 
@@ -24,5 +27,14 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
         if (view.id == R.id.btn_new_phrase) {
             TODO("TODO")
         }
+    }
+
+    /**
+     * Esta função vai exibir o nome de usuário informado
+     */
+    private fun handleUsername() {
+        val username = SecurityPreferences(this).getString("USER_NAME")
+
+        binding.textWelcome.text = "Olá, $username!"
     }
 }
