@@ -1,10 +1,13 @@
-package com.motichat
+package com.motichat.ui
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.motichat.infrastructure.MotiChatConstants
+import com.motichat.R
+import com.motichat.infrastructure.SecurityPreferences
 import com.motichat.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -37,7 +40,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         if (username.matches(regex)) {
             // Salvar o nome do usuário
-            SecurityPreferences(this).saveString("USER_NAME", username)
+            SecurityPreferences(this).saveString(MotiChatConstants.KEY.USER_NAME, username)
 
             // Navegar para a próxima activity
             startActivity(Intent(this, UserActivity::class.java))

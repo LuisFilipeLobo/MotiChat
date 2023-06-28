@@ -1,8 +1,11 @@
-package com.motichat
+package com.motichat.ui
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.motichat.infrastructure.MotiChatConstants
+import com.motichat.R
+import com.motichat.infrastructure.SecurityPreferences
 import com.motichat.databinding.ActivityUserBinding
 
 class UserActivity : AppCompatActivity(), View.OnClickListener {
@@ -33,7 +36,7 @@ class UserActivity : AppCompatActivity(), View.OnClickListener {
      * Esta função vai exibir o nome de usuário informado
      */
     private fun handleUsername() {
-        val username = SecurityPreferences(this).getString("USER_NAME")
+        val username = SecurityPreferences(this).getString(MotiChatConstants.KEY.USER_NAME)
 
         binding.textWelcome.text = "Olá, $username!"
     }

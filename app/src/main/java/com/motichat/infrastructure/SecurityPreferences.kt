@@ -1,4 +1,4 @@
-package com.motichat
+package com.motichat.infrastructure
 
 import android.content.Context
 import android.content.SharedPreferences
